@@ -17,9 +17,9 @@ defmodule Test do
     def product(m, n) do
         if m == 0 do
             n = 0
-            else
+        else
             n + product((m-1),n)
-            end
+        end
     end
     def caseProduct(m, n) do
         case m do
@@ -31,19 +31,16 @@ defmodule Test do
     end
     def clausProduct(0, _) do 0 end
     def clausProduct(m, n) do
-       n + clausProduct((m-1), n)
+        n + clausProduct((m-1), n)
     end
+    def exp(_,0) do 1 end
     def exp(x,n) do
-        case n do
+        case rem(n,2) do
             0 ->
-                1
+                e = exp(x, div(n,2))
+                e * e
             1 ->
-                x
-            if rem(n,2) do
-                   x * exp(x,(n/2))
-                end
-            _ ->
-                x * exp(x, n-1)
+                exp(x, n-1) * x
         end
     end
 end
