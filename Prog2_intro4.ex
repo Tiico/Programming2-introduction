@@ -26,4 +26,17 @@ defmodule ListOperations do
     def remove(x, [head | tail]) do
         [head | remove(x, tail)]
     end
+
+    def unique([]) do [] end
+    def unique([head | tail]) do
+        [head | unique(remove(head, tail))]
+    end
+
+    def reverse([]) do [] end
+    def reverse([head | tail]) do
+        reverse(tail) ++ [head]
+    end
+
+
 end
+
