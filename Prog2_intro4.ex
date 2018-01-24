@@ -75,5 +75,30 @@ defmodule ListOperations do
     def merge(ls, [x2 | rs]) do
         [x2 | merge(ls, rs)]
     end
+    #QuickSort
+
+    def qsplit(_, [], small, large) do {small, large} end
+    def qsplit(p, [h | t], small, large) do
+        if (h > p) do
+            qsplit(p, t, small, [h | large])
+        else
+            qsplit(p, t, [h | small], large)
+        end
+    end
+
+    def append(small, large) do
+        case small do
+            [] -> large
+            [h | t] -> [h | append(t, large)]
+        end
+    end
+
+    def qsort([]) do [] end
+    def qsort([p | l]) do
+        {list1, list2} = qsplit(p, l, [], [])
+        small = qsort(list1)
+        large = qsort(list2)
+        append(small, [p | large])
+    end
 end
 
