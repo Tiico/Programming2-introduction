@@ -36,7 +36,31 @@ defmodule ListOperations do
     def reverse([head | tail]) do
         reverse(tail) ++ [head]
     end
+    #Sorting Functions
+    def insert(x, []) do [x] end
+    def insert(x, [head | tail]) do
+        if (head < x) do
+            [head | insert(x, tail)]
+        else
+            [x|[head|tail]]
+        end
+    end
 
+    def isort(l) do isort(l, []) end
+    def isort([], sorted) do sorted end
+    def isort([head | tail], sorted) do
+        isort(tail, insert(head, sorted))
+    end
 
+    def msplit([], ls, rs) do {ls, rs} end
+    def msplit([head | tail], ls, rs) do
+        msplit(tail, [head | rs], ls)
+    end
+
+    def msort([]) do [] end
+    def msort([x]) do [x] end
+    def msort(l) do
+        {left, right}
+    end
 end
 
