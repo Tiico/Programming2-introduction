@@ -37,6 +37,8 @@ defmodule ListOperations do
         reverse(tail) ++ [head]
     end
     #Sorting Functions
+
+    #InsertionSort
     def insert(x, []) do [x] end
     def insert(x, [head | tail]) do
         if (head < x) do
@@ -51,16 +53,27 @@ defmodule ListOperations do
     def isort([head | tail], sorted) do
         isort(tail, insert(head, sorted))
     end
-
-    def msplit([], ls, rs) do {ls, rs} end
-    def msplit([head | tail], ls, rs) do
-        msplit(tail, [head | rs], ls)
-    end
+    #MergeSort
 
     def msort([]) do [] end
     def msort([x]) do [x] end
     def msort(l) do
-        {left, right}
+        {ls, rs} = msplit(l, [], [])
+        merge(msort(ls), msort(rs))
+    end
+
+    def msplit([], ls, rs) do {ls, rs} end
+    def msplit([x | tail], ls, rs) do
+        msplit(tail, [x | rs], ls)
+    end
+
+    def merge([], rs) do rs end
+    def merge(ls, []) do ls end
+    def merge([x1 | ls], [x2 | _] = rs) when x1 < x2 do
+        [x1 | merge(ls, rs)]
+    end
+    def merge(ls, [x2 | rs]) do
+        [x2 | merge(ls, rs)]
     end
 end
 
